@@ -1,0 +1,1 @@
+export default () => 'version_0_0';
