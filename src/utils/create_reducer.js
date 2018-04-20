@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 import ____ from "../reducers/init";
 
 export default function createReducer(asyncReducers) {
@@ -6,4 +6,4 @@ export default function createReducer(asyncReducers) {
     ____,
     ...asyncReducers
   });
-};
+}

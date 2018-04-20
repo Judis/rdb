@@ -1,4 +1,4 @@
-import BaseModel from '../base_model';
+import BaseModel from "../base_model";
 
 class Guests extends BaseModel {
   get fullName() {
@@ -11,7 +11,7 @@ class Guests extends BaseModel {
       firstName: null,
       lastName: null,
       email: null
-    }
+    };
   }
 }
 

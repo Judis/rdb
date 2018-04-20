@@ -1,4 +1,4 @@
-import injectAsyncReducer from './inject_async_reducer';
+import injectAsyncReducer from "./inject_async_reducer";
 
 const createReducer = function(initialState, handlers) {
   return function reducer(state = initialState, action) {
@@ -13,7 +13,7 @@ const createReducer = function(initialState, handlers) {
 const add = function(state, action) {
   return {
     ...state,
-    [action.payload.uuid] : action.payload
+    [action.payload.uuid]: action.payload
   };
 };
 
@@ -29,10 +29,13 @@ export default function reducerFactory(storage, modelName) {
   injectAsyncReducer(
     storage,
     modelName.toLowerCase(),
-    createReducer({}, {
-      [`ADD_${modelName.toUpperCase()}`]: add,
-      [`UPDATE_${modelName.toUpperCase()}`]: add,
-      [`REMOVE_${modelName.toUpperCase()}`]: remove
-    })
+    createReducer(
+      {},
+      {
+        [`ADD_${modelName.toUpperCase()}`]: add,
+        [`UPDATE_${modelName.toUpperCase()}`]: add,
+        [`REMOVE_${modelName.toUpperCase()}`]: remove
+      }
+    )
   );
-};
+}

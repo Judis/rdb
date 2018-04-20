@@ -1,9 +1,11 @@
-import initStore from './utils/init_store.js';
-import reducersFactory from './utils/reducer_factory';
+import initStore from "./utils/init_store.js";
+import reducersFactory from "./utils/reducer_factory";
 
-import Guests from './demo/guests';
+import Guests from "./demo/guests";
 
-if (process.env.NODE_ENV === 'development') { window.pool = {}; }
+if (process.env.NODE_ENV === "development") {
+  window.pool = {};
+}
 
 let instance = null;
 
@@ -36,7 +38,7 @@ class DataBase {
       this[method] = this.reduxStorage[method];
     }
 
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === "development") {
       window.pool.storage = this.reduxStorage;
     }
   }

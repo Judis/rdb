@@ -1,1 +1,1 @@
-export default () => 'version_0_0';
+export default () => "version_0_0";

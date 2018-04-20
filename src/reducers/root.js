@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
-import ____ from './init';
+import { combineReducers } from "redux";
+import ____ from "./init";
 
 const rootReducer = combineReducers({
   ____

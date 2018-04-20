@@ -1,25 +1,24 @@
-import uuidv4 from 'uuid';
+import uuidv4 from "uuid";
 
-const values = Symbol('values');
+const values = Symbol("values");
 
 const __defineSetterAndGetter = function(target, key) {
-  Object.defineProperty(
-    target,
-    key,
-    {
-      get() {
-        return target[values][key];
-      },
-      set(value) {
-        target[values][key] = value;
-      }
+  Object.defineProperty(target, key, {
+    get() {
+      return target[values][key];
+    },
+    set(value) {
+      target[values][key] = value;
     }
-  );
+  });
 };
 
 const __dispatchChanges = function(target) {
-  target.constructor.storage.dispatch({type: `UPDATE_${target.constructor.name.toUpperCase()}`, payload: target[values]});
-}
+  target.constructor.storage.dispatch({
+    type: `UPDATE_${target.constructor.name.toUpperCase()}`,
+    payload: target[values]
+  });
+};
 
 const __fillProperties = function(target, args) {
   target[values] = {};
@@ -30,21 +29,16 @@ const __fillProperties = function(target, args) {
   });
 
   __defineUUID(target, args);
-}
+};
 
 const __defineUUID = function(target, args) {
   target[values].uuid = args.uuid || null;
-  Object.defineProperty(
-    target,
-    'uuid',
-    {
-      get() {
-        return target[values].uuid;
-      },
+  Object.defineProperty(target, "uuid", {
+    get() {
+      return target[values].uuid;
     }
-  );
-}
-
+  });
+};
 
 class BaseModel {
   constructor(args = {}) {
@@ -70,15 +64,14 @@ class BaseModel {
   }
 
   static get all() {
-    return Object.values(this.rawState)
-      .map(raw => new this(raw));
+    return Object.values(this.rawState).map(raw => new this(raw));
   }
 
-  static where(conditions) {
-    // ...
-    // Use solution from MapBox GL Filters
-    // https://github.com/mapbox/mapbox-gl-js/tree/64e98417bf290bf9f3c893e20f1015f2d7769de0/src/style-spec/feature_filter
-  }
+  // static where(conditions) {
+  //   ...
+  //   Use solution from MapBox GL Filters
+  //   https://github.com/mapbox/mapbox-gl-js/tree/64e98417bf290bf9f3c893e20f1015f2d7769de0/src/style-spec/feature_filter
+  // }
 
   static getBy(field, value) {
     return new this(this.all.filter(el => el[field] === value)[0] || null);
@@ -97,7 +90,10 @@ class BaseModel {
       payload[key] = args[key] || this.properies[key];
     });
 
-    this.storage.dispatch({type: `ADD_${this.name.toUpperCase()}`, payload: payload});
+    this.storage.dispatch({
+      type: `ADD_${this.name.toUpperCase()}`,
+      payload: payload
+    });
 
     return new this(
       this.storage.getState()[this.name.toLocaleLowerCase()][payload.uuid]
@@ -107,7 +103,7 @@ class BaseModel {
   static get properies() {
     return {
       id: null
-    }
+    };
   }
 
   static get storage() {
