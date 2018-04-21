@@ -1,12 +1,8 @@
 import initStore from "./utils/init_store.js";
 import reducersFactory from "./utils/reducer_factory";
 
-import Guests from "./demo/guests";
-import BookingRooms from "./demo/booking_rooms";
-
-if (process.env.NODE_ENV === "development") {
-  window.pool = {};
-}
+import Guests from "./models/guests";
+import BookingRooms from "./models/booking_rooms";
 
 let instance = null;
 
@@ -25,25 +21,20 @@ class DataBase {
   }
 
   // Method to register model at DataBase module
-  // modelClass: function / class
   registerModel(modelClass) {
     modelClass.storage = this;
     this[modelClass.name] = modelClass;
     reducersFactory(this, modelClass.name);
   }
 
+  // Method to create redux storage
   createReduxStorage() {
     this.reduxStorage = initStore();
 
     for (let method in this.reduxStorage) {
       this[method] = this.reduxStorage[method];
     }
-
-    if (process.env.NODE_ENV === "development") {
-      window.pool.storage = this.reduxStorage;
-    }
   }
 }
 
-window.Guests = Guests;
 window.DB = new DataBase([Guests, BookingRooms]);

@@ -1,4 +1,5 @@
 import uuidv4 from "uuid";
+import filter from "./utils/filter";
 
 class BaseModel {
   constructor(args = {}) {
@@ -36,11 +37,11 @@ class BaseModel {
     return Object.values(this.rawState).map(raw => new this(raw));
   }
 
-  // static where(conditions) {
-  //   ...
-  //   Use solution from MapBox GL Filters
-  //   https://github.com/mapbox/mapbox-gl-js/tree/64e98417bf290bf9f3c893e20f1015f2d7769de0/src/style-spec/feature_filter
-  // }
+  static where(conditions) {
+    const compiledFilter = filter(conditions);
+
+    return this.all.filter(compiledFilter);
+  }
 
   static getBy(field, value) {
     return new this(this.all.filter(el => el[field] === value)[0] || null);
