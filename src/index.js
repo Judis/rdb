@@ -2,6 +2,7 @@ import initStore from "./utils/init_store.js";
 import reducersFactory from "./utils/reducer_factory";
 
 import Guests from "./demo/guests";
+import BookingRooms from "./demo/booking_rooms";
 
 if (process.env.NODE_ENV === "development") {
   window.pool = {};
@@ -45,4 +46,4 @@ class DataBase {
 }
 
 window.Guests = Guests;
-window.DB = new DataBase([Guests]);
+window.DB = new DataBase([Guests, BookingRooms]);
