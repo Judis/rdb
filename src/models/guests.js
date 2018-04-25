@@ -5,7 +5,7 @@ class Guests extends BaseModel {
     return `${this.firstName} ${this.lastName}`.trim();
   }
 
-  static get properies() {
+  static get properties() {
     return {
       id: null,
       firstName: null,

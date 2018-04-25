@@ -1,7 +1,7 @@
 import BaseModel from "../base_model";
 
 class BookingRooms extends BaseModel {
-  static get properies() {
+  static get properties() {
     return {
       id: null,
       bookingId: null,

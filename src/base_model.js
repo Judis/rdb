@@ -3,8 +3,8 @@ import filter from "./utils/filter";
 
 class BaseModel {
   constructor(args = {}) {
-    Object.keys(this.constructor.properies).forEach(key => {
-      this[key] = args[key] || this.constructor.properies[key];
+    Object.keys(this.constructor.properties).forEach(key => {
+      this[key] = args[key] || this.constructor.properties[key];
     });
   }
 
@@ -67,7 +67,7 @@ class BaseModel {
     return this.all;
   }
 
-  static get properies() {
+  static get properties() {
     return {
       id: null
     };
