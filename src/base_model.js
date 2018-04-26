@@ -2,9 +2,9 @@ import uuidv4 from "uuid";
 import filter from "./utils/filter";
 
 class BaseModel {
-  constructor(args = {}) {
+  constructor(props = {}) {
     Object.keys(this.constructor.properties).forEach(key => {
-      this[key] = args[key] || this.constructor.properties[key];
+      this[key] = props[key] || this.constructor.properties[key];
     });
   }
 
@@ -19,11 +19,11 @@ class BaseModel {
     return this;
   }
 
-  update(args = {}) {
-    Object.keys(args)
+  update(props = {}) {
+    Object.keys(props)
       .filter(key => this.hasOwnProperty(key))
       .forEach(key => {
-        this[key] = args[key];
+        this[key] = props[key];
       });
 
     return this.save();
@@ -69,7 +69,9 @@ class BaseModel {
 
   static get properties() {
     return {
-      id: null
+      id: {
+        type: "number"
+      }
     };
   }
 
